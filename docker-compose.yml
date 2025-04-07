@@ -1,0 +1,19 @@
+version: '3.9'
+services:
+  db15: 
+    image: postgres:15
+    command: postgres -c shared_preload_libraries=pg_stat_statements -c pg_stat_statements.track=all -c max_connections=200
+    ports:
+      - '5445:5432'
+    volumes:
+      - db15:/var/lib/postgresql/data
+    container_name: rent_bike_db
+    environment:
+      POSTGRES_USER: danylo
+      POSTGRES_PASSWORD: admin123
+      POSTGRES_DB: postgres
+
+volumes:
+  db15: {
+    driver: local
+  }
